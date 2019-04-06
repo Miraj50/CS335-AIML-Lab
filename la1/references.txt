@@ -1,0 +1,4 @@
+https://en.wikipedia.org/wiki/Overfitting (learn what overfitting is)
+https://docs.python.org/2/library/collections.html#collections.Counter (for using python's counter)
+https://en.wikipedia.org/wiki/Multiclass_classification (Multiclass classification)
+https://en.wikipedia.org/wiki/Image_gradient (Image gradient)

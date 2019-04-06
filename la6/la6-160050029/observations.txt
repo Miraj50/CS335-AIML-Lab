@@ -1,0 +1,8 @@
+Observations
+------------
+(1) path.png
+=> We can see that the path that we have got deviates a lot from the optimal path. We can also see that many cells are visited more than once before reaching the goal state for example the yellow start state has been overridden during the traversal and although we can see only 30 red cells here, there were in fact 82 steps before reaching the destination.
+This happens because of the non-determinism that has been introduced by the stochastic maze. So for example, in this case where p=0.2, we take the correct action with a probability of atmost 0.2+0.8/4 = 0.4 and the incorrect action with a probability of atleast 0.6. So for a good number of instances we would be taking the incorrect move and hence we end up moving the way shown in the figure. As we decrease p, the spread in the graph will also increase because of the increase in number of actions.
+
+(2) plot.png
+=> We can see a decreasing graph between the number of actions needed to reach Exit and the value of probability. This is expected because as we keep on decreasing the probability, we introduce more and more non-determinism into the travel and hence the agent make more and more "mistakes", before it can reach the Exit, hence increasing the number of actions. In other words, as we increase p, determinism increases, hence the agent takes the correct action more number of times thereby decreasing the number of actions required to reach the exit.

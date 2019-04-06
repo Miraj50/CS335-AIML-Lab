@@ -1,0 +1,2 @@
+Numpy Docs and Python Docs (For `random` functions and their uses)
+Section 18.10 : Russell and Norvig (2010) (Bagging and Boosting)

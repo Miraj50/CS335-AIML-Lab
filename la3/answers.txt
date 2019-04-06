@@ -1,0 +1,53 @@
+Bagging:
+In general, initially, as the number of classifiers increases, the training, validation as well as the test accuracies increase (a few kinks can be found in between), but after a certain number of classifiers, it stagnates and starts fluctuating (for e.g. ~92% for training, ~76-77% for test and validation).
+
+Boosting:
+Boosting's graph is a bit more smoother than bagging. Initially, as the number of classifiers increases, the training, validation as well as the test accuracies increase and after a certain nmber of classifiers, the test and the validation accuracies become consistent (~76-77%), but the training accuracy keeps on increasing, albeit slowly, and for n=20, reaches to ~96%.
+
+Experimenting with the switches:
+-------------------------------
+-> Changing r(ratio):
+
+Bagging: Decreasing r to 0.5, doesn't have much change on the shape of the graph, except, the test and validation accuracy starts fluctuating much sooner and the accuracies drop a little. The training accuracy also stagnates and starts fluctuating ~88%. Increasing r to 1.5, increases training accuracy to about ~93-94%.
+
+Boosting: Increasing r to 1 (was 0.5 originally), makes the graph smoother. The test and validation accuracies stagnate much quicker and the training accuracy reaches to ~97-98%. When we further increase r to 1.5, we notice that, the test accuracy stagnates immediately, but the most striking thing is that, the training accuracy increases and for n=20, actually becomes 100%, proving what we had read in class about the theorem.
+
+-> Changing size of Dataset:
+
+Bagging: Decreasing it to 100, we see that the test accuracy drops to ~66-67%, while the training accuracy goes up to ~98% and fluctuates. The most probable cause could be over-fitting because of small dataset. 
+
+Boosting: Decreasing it to 100, we see that, it doesn't take much time for training accuracy to hit 100%, which it does at n=3 itself (overfitting augmented with boosting), whilst there is'nt much change for test accuracy.
+
+____
+(Q1)
+----
+In the case of bagging, the training accuracy is less than that of boosting and reaches to about to ~92%, but once it reaches it, it starts fluctuating. In the case of boosting, the training accuracy keeps on increasing and reaches to ~96% (if we properly tune the hyperparameters, then it even reaches 100%). If we see from a theoretical point of view, bagging is like a majority count (vote), while boosting is like a sequential correction of errors. When an error occurs, its weight is increased and corrected by the next (not literally "next") hypothesis (base classifier), hence the training accuracy keeps on increasing and theoretically, if accuracy rate is more than 0.5+e for each base learner, then it will reach 100% for sufficient number of classifiers. While for bagging, if there are some outliers, then there is no guarantee that it will be corrected, even if we take a majority vote. 
+
+____
+(Q2)
+----
+Yes, the statement is true i.e. an ensemble combining perceptrons with weighted majority cannot be represented as an equivalent single perceptron as we can produce a counter-example. Note that, I have considered all cases (for e.g. if there is a linearly separable data and we still apply ensemble learning to it then we do have an equivalent perceptron), so even if a single counter example exists then I consider the statement as true.
+
+Consider a somewhat triangular distribution of (+)'s and (-)'s as shown below. Here, this problem can be solved by three base classifiers (The side which they call positive is marked by "@") with equal weights, say 1/3. As an example, for region A, we have for a point `sign(-1/3+1/3-1/3)` => "-" and for region B, we have for a point `sign(+1/3-1/3+1/3)` => "+" and similarly for other regions. But it is clear that this 2D distribution is not linearly separable and there is no single equivalent perceptron that can classify it correctly.
+                                                       
+                                    \    +   /
+                                     \ +   +/
+                                      \  + /
+                                     - \ +/  -
+                                  -     \/
+								        /\ -  -
+  								-  -   / -\-     -   
+								      / -  \   -       (A)
+							-	-  - /      \ -    - 
+								-   /-   -   \    -  
+								   /    -   - \
+							-	  /   -  -     \  -   -
+						-	-	-/  -      --   \   -
+							-	/   -   -     -  \     -
+			        ___________/__________________\___________	
+						+  +  /   -     -          \ +       @ P3
+						  +  /        -   -  -  -   \  +      
+				(B)	+	+	/  -   -     -     -     \+  +  
+					  +	   /	  -		              \  +  
+                          /                            \
+                        @/ P1                        P2 \@

@@ -1,0 +1,68 @@
+______________________
+Task 2.1: XOR Data set
+----------------------
+Learning rate : 0.3
+Number of hidden layers : 2
+1st Layer : # of Input Nodes = 2, # of Output Nodes = 4
+2nd layer : # of Input Nodes = 4, # of Output Nodes = 2
+Total Nodes : 8
+Batchsize : 5
+Number of epochs : 30
+Test Accuracy : 98.8% for seed = 1
+				98.1% for seed = 8
+Note: It is observed that, sometimes, for the above model, we can find a seed for which the accuracy falls ino the region of 80-90%.
+
+=> We need at least two layers because the data is not linearly separable. On experimenting with the number of input nodes of the second layer, we see that using 4 input nodes give us a higher accuracy. As taught in class, it should have been possible with 2 neurons in the middle (accuracy is very less for it), but increasing the number of neurons helps in learning the smaller details (can cause overrfitting later on) in the dataset that we have been provided.
+
+_____________________________
+Task 2.2: SemiCircle Data set
+-----------------------------
+Learning rate : 0.2
+Number of hidden layers : 2
+1st Layer : # of Input Nodes = 2, # of Output Nodes = 2
+2nd layer : # of Input Nodes = 2, # of Output Nodes = 2
+Total Nodes : 6
+Batchsize : 10
+Number of epochs : 30
+Test Accuracy : 99.0% for seed 8
+				95.6% for seed 1
+
+=> Similar to the explanation above, we need at least two layers as the data is not linearly separable (a single line cannot distinguish the points). Using two neurons in the middle gives a high accuracy. 
+
+_______________
+Task 2.3: MNIST
+---------------
+Learning rate : 0.1
+Number of hidden layers : 1
+1st Layer : # of Input Nodes = 784, # of Output Nodes = 10
+Total nodes : 794
+Batchsize : 10
+Number of epochs : 20
+Test Accuracy : 90.66% for seed 1
+				90.83% for seed 8
+
+Using just one layer keeps the accuracy just at the border of 90%.
+If we add one more layer, then we can improve accuracy.
+
+->	1st Layer : # of Input Nodes = 784, # of Output Nodes = 20
+	1st Layer : # of Input Nodes = 20, # of Output Nodes = 10
+	Test Accuracy : 94.05% for seed 8
+
+->	1st Layer : # of Input Nodes = 784, # of Output Nodes = 50
+	1st Layer : # of Input Nodes = 50, # of Output Nodes = 10
+	Test Accuracy : 96.11% for seed 8
+
+=> As we can see the data can be classified with just one layer. The inputs are 784 pixels. Images (read as vectors) of the same digits are similar and different from images of other digits and so it turns out they can be classified (linearly separated) with 10 hyperplanes with good enough accuracy (approx 90%). Hence only layer suffices. If we increase the layers, then the accuracy increases even more. 
+
+_______________
+Task 2.4: CIFAR
+---------------
+Learning rate : 0.2
+Hidden layers : One Convolutional Neural Network : Input -> [3,32,32], Filter Size -> [10,10], Number of Filters -> 4, Stride -> 2
+				Two Neural Network : 1-> # of Input Nodes = 144, # of Output Nodes = 30
+								   	 2-> # of Input Nodes = 30, # of Output Nodes = 10			
+Batchsize : 20
+Number of epochs : 30
+Test Accuracy : 40.21% for seed 1337
+
+=> A Convolution Neural Network learns features/patterns (input is image) in input. And then the Neural Network classifies them. As we increase the CNN layers, deeper features are discovered, which in turn help for better classification. Here since our goal was to achive accuracy of 35%, we could do with one CNN layer. Depending upon what features are learnt, the NN classifies them. We ee that using two fully connected layers help us achieve our goal.

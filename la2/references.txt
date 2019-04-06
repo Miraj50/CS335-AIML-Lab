@@ -1,0 +1,5 @@
+https://google-developers.appspot.com/machine-learning/crash-course/backprop-scroll/ [Backpropagation]
+https://www.jefkine.com/general/2016/09/05/backpropagation-in-convolutional-neural-networks/ [Backpropagation]
+https://medium.com/@2017csm1006/forward-and-backpropagation-in-convolutional-neural-network-4dfa96d7b37e [Simple Backprop]
+https://stackoverflow.com/questions/3775032 [Bias]
+Numpy Docs

@@ -1,0 +1,40 @@
+______
+Task 3
+------
+
+Some parameters are the default ones which were given to us (max_iter = default = 30000) i.e.
+
+For Ridge Gradient Descent:
+
+Learning Rate = 0.00001
+Epsilon = 1e-4
+Tuned Lambda = 12.43
+SSE = 170317218795.39627 for 12.43
+(I tried to go till two decimal places. For both 12.42 and 12.44, SSE is larger)
+
+For Lasso (Coordinate Gradient Descent) (max_iter = default = 1000):
+Tuned Lambda = 340000
+SSE = 168591968677.34384 for 340000
+
+The plots help us to tune the lambda.
+Suppose initially, we chose some list of lambdas. After plotting SSE vs Lambda, we may find ourselves in three situations:
+(i) We get a decreasing graph
+(ii) We get an increasing graph
+(iii) We get a graph containing a minima
+
+(i) gives us the conclusion that the chosen lambdas are less than the tuned Lambda. This is because we are in the overfitting region. If lambda is very less, then regularization term carries less significance and the focus goes into minimizing the (Y_i-X.W)^2 term i.e. such a W is likely to be picked which more or less matches each X_i.W to Y_i => overfitting on the training data. This in turn leads to a high SSE on the validation/test data.
+
+(ii) is the opposite of (i) i.e. it gives us the conclusion that the chosen lambdas are more than the tuned Lambda. This is because we are in the underfitting region. If lambda is very high, then regularization term carries more significance than the (Y_i-X.W)^2 term and hence focus is to minimize this. Hence the training data points are not given much significance leading to under-fitting on the training data. This in turn leads to a high SSE on the validation/test data.
+
+(iii) suggest that we have found our tuned Lambda at the Minima as this is the point where the SSE is minimized and the W that we have best represents the data that we have.
+
+So, starting with our initial guess, if we find ourselves in region (i), then we increase our lambdas in the list. If in (ii), we decrease our lambdas in the list. We do this until we find a point of minima in the plot which corresponds to the tuned lambda.
+
+______
+Task 5
+------
+Some observations :
+Lasso had a smaller SSE as compared to Ridge. For this dataset we observe from lasso that many features were not helpful. Hence we got a better representation of the data after removing those features (zero those weights) and hence less SSE.
+Many elements of the weight vector become zero in Lasso (For the dataset given, we had 207 out of 304 were becoming zero). The reason for this is that Lasso takes the axes seriously but it is not the case with ridge.
+
+In certain situations, Lasso can be advantageous to Ridge. To elaborate on it, if we are predicting something which does not depend on some of the parameters, then in ridge regression the weights corresponding to those features will never be equal to zero (ignore the initialization here) as in ridge weights for those features asymptotically goes to zero but not exactly zero, whereas in Lasso those weights will become exactly zero. Ridge regression with cross-validation can also be used in those cases where the amount of data is very less compared to the number of parameters/features in use. Hence in situations/dataset where most features are useful then ridge may do a bit better, but in lasso, unsuitable features will be ignored and we will get a better reprsentation of the data.

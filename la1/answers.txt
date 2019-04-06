@@ -1,0 +1,34 @@
+Task 2.1:
+--------
+We see that the accuracy increases as more number of data points are seen and then after some time it saturates (on an average as a little bit of fluctuations are there). Accuracy will increase (as our model will now be able to model more data) till it reaches the optimum point where fitting one misfits another (hence the fluctuations). We also see that training accuracy is more than test accuracy, there is a gap between test accuracy and training accuracy because of overfitting as our model will best represent the training data on which it has been trained and there will be some mis-classifications when new testing data is introduced.  
+
+Task 2.2:
+---------
+We observe that training accuracy is higher initially and the test accuracy is less. As training set size increases, training accuracy decreases and the test accuracy increases and they come closer to each other. It is easier for a model to represent less number of points. It becomes more and more difficult for a model to learn that can correctly represent all the training data. Hence initially training accuracy is more and test accuracy is less as the model's generalizability is very less now (it can only correctly repesent the few number of data points on which it has been trained now). As training size increases, model's ability to generalize increases, hence test accuracy increases.
+
+It depends on the setup/algorithm. For example, here if we print out the `self.weights` initially, we see that they are empty sets. Hence the dot products will be all equal to zero. And the argMax function in util.py will return the smallest label i.e. 0 for all points. Hence all points will be classified as label 0.
+The expected accuracy will depend upon the distribution. Here if we see the number of test_data points and their label by running the command `collections.Counter("".join(open("data/D1/test_labels", "r").read().strip().split()))`, we get => {'0': 2055, '7': 2049, '6': 2026, '5': 2016, '1': 2014, '3': 1983, '4': 1983, '9': 1971, '8': 1971, '2': 1932}. Hence, the expected accuracy would be 2055/20000*100 = 10.275%
+
+Task 3.1:
+---------
+The test accuracies obtained are:
+
+(1vr)
+> python dataClassifier.py -c 1vr -t 800 -s 8000
+>>> 5706 correct out of 8000 (71.3%)
+
+(1v1)
+> python dataClassifier.py -c 1v1 -t 800 -s 8000
+>>> 5724 correct out of 8000 (71.5%)
+
+For 80000 train and 20000 test:
+
+(1vr)
+> python dataClassifier.py -c 1vr -t 80000 -s 20000
+>>> 14752 correct out of 20000 (73.8%)
+
+(1v1)
+> python dataClassifier.py -c 1v1 -t 80000 -s 20000
+>>> 15766 correct out of 20000 (78.8%)
+
+We see that when number of train and test data were small, both 1v1 and 1vr gave almost the same accuracy. This is expected because as mentioned in Task 2.2, a model can represent a small number of data realtively easily. But when the amount of data increased, accuracies for both increase (as expected due to more generalization), but increase is more for 1v1 (2.5%) than 1vr (7.3%). What I think is, in 1v1, we have more weights, each for every pair of labels. Hence it can express more and be more precise/accurate while classifying than its 1vr counterpart. Hence its accuracy level is better than that of 1vr.    

@@ -1,0 +1,2 @@
+https://www.cse.iitb.ac.in/~shivaram/teaching/cs337+335-s2019/resources/rl.pdf (For value iteration)
+Python Docs

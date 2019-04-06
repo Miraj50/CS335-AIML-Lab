@@ -1,0 +1,4 @@
+Python and mainly Numpy Docs
+https://machinelearningmastery.com/k-fold-cross-validation/
+https://en.wikipedia.org/wiki/Coordinate_descent
+https://www.youtube.com/watch?v=NGf0voTMlcs (a simple feel for lasso regression)

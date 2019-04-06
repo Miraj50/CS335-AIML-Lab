@@ -1,0 +1,22 @@
+______
+Task 3
+------
+I think we can perform an informed search techniques, but it won't better than the current constraint propagation DFS that we have. One way is to define our current method of solving the Sudoku problem in terms of Path Cost and Heuristic. So, we can choose our heuristic (of a cell) to be the reciprocal of the number of possible numbers that the cell can take (our next state is of course the sudoku with that cell filled). We can take our cost function to be 1. If we do this, then we are taking that cell with the maximum constraints (implies least number of possibilities, implies maximum heuristic since we take reciprocal) and proceeding forward, which is what essentially happens in A* (The heuristic is admissible as the minimum optimal cost is 1, and our heuristic is atmost 1). So if we do this, we are essentially doing constraint propagation in the disguise of informed search.
+There is also this thing that proper A* requires a graph and a goal state. In Sudoku, the end state is unknown, hence it becomes difficult to define a heuristic as any random guess of filling a cell brings us one step closer to our goal.
+______
+Task 7
+------
+(1)
+Dijkstra's shortest path algorithm is basically a special case of A* algorithm i.e. in Dijkstra we just use the current cost to determine the best possible route by exploring all possible directions from a node i.e. it is essentially A* but with a null heuristic. In A* because of the consistent heuristic [the distance heuristic that we have used is consistent as it can be thought of as a triangle with edges h(n), h(n'), cost(n,n') and using Triangle inequality h(n)<cost(n,n')+h(n')], we only focus on reaching the goal node and not to reach every other node, hence we only explore the supposingly "better" nodes. Therefore, we have to explore less nodes to reach the final state.
+Hence in case we used a simple Shortest Path Problem Algorithm like Dijkstra's, we have have visited  :
+           IIT | Mumbai
+           ------------
+Dijkstra : 80  | 26743
+A*       : 21  | 13051
+
+(2)
+(Ignoring the null heuristic) When we have to reach multiple nodes, then two cases can arise:
+==> We have to reach any one of the multiple goal states.
+In this case we can generalise our current heuristic i.e. heuristic for a state would be the minimum of the heuristics from that state to every goal state where heuristic could be, say, the Haversine Formula.
+==> We have to reach all the goal states.
+This case boils down to the Travelling Student(Salesman) Problem. Given that this problem is very famous and the work that has been done on it for years has resulted in many heuristics (http://160592857366.free.fr/joe/ebooks/ShareData/Heuristics%20for%20the%20Traveling%20Salesman%20Problem%20By%20Christian%20Nillson.pdf) which have been improving with time, so just quoting a heuristic from there doesn't help for this assignment. A simple heuristic that we can think of is that since we want to visit all the goal states, heuristic for a state would be the maximum of of the distances (say Harversine) to the unvisisted goal states from that state. Due to this at a given node, we always focus towards moving to a goal state and when that is reached we shift our attention to the other goal states.

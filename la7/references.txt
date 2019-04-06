@@ -1,0 +1,3 @@
+http://norvig.com/sudoku.html
+http://160592857366.free.fr/joe/ebooks/ShareData/Heuristics%20for%20the%20Traveling%20Salesman%20Problem%20By%20Christian%20Nillson.pdf (Different heuristics available currently)
+Python Docs

@@ -1,0 +1,66 @@
+Name: Rishabh Raj
+Roll number: 160050029
+========================================
+
+
+================
+     TASK 2
+================
+
+
+1. Run your code on datasets/garden.csv, with different values of k. Looking at the performance plots, does the SSE of k-means algorithm ever increase as the iterations are made? (1 mark)
+
+Answer: No, the SSE of k-means algorithm never increases as the iterations are made i.e. the performance plots are decreasing functions.
+		Its proof is exactly what we had studied in our class-note 2 on Sir's website. That is to say, SSE decreases in every next iteration. An iteration can be broken into two steps. (1)-> Shifting the points into new clusters and (2)-> Recalculating the centroids. In (1), the SSE will obviously decrease as the distances are getting decreased (by definition/algorithm of k-means). In (2) the cluster remains the same and the centroids are re-calculated based on the new points that might have come into the cluster. Here also the SSE can remain same/decrease, because of the mathematical basis that when we calculate the sum of squares of data points from "some point", then it is minimised when "some point" is the mean of the points. So from (1) and (2) combined, we say that SSE never increases/decreases.
+
+3. Look at the files 3lines.png and mouse.png. Manually draw cluster boundaries around the 3 clusters visible in each file (no need to submit the hand drawn clusters). Test the k-means algorithm on the datasets datasets/3lines.csv and datasets/mouse.csv. How does the algorithm’s clustering compare with the clustering you would do by hand? Why do you think this happens? (1 mark)
+
+Answer: If we go by our intuition then say, for 3lines.png, we will draw clusters around each line (vertically elongated group of points) and for mouse.png, two 			small clusters around the two ears and one relatively bigger in the middle (like Mickey Mouse). When we run our algorithm on these data points, we can see 			that parts of "our" drawn clusters have come into a single cluster (for e.g. upper half of two or more vertical lines come under one cluster, some part of 			middle face of Mickey clusters with each of the ear). From our point of view, we can say that it does not perform as well as we would have liked it to.
+		The reason this happens is because k-means suffers from the way initialization has been done. For 3lines.png, we would have arrived at the answer that we had expected if our initial guesses were at the centres of each vertical line (we can see this by drawing bisecting lines b/w the centroids and data-points on one side of line will belong to that centroid). But in random initialization, the probability is very less that we actually choose this configuration. For any other random configuration, data-points from more than one group(i.e. our intuitive clusters) can belong to one centroid and at the end we won't get our intuitive clusters. The clusters that we have got for mouse.png are actually okay. The reason is that the cluster boundaries can't actually be curved lines (think in terms of bisecting lines between centroids). So a little part of Mickey's face towards the ears will be clustered with the ears and that is what we get as the result of running our algorithm.
+
+
+
+================
+     TASK 3
+================
+
+1. For each dataset, with kmeansplusplus initialization algorithm, report “average SSE” and "average iterations". Explain the results. (2 mark)
+Answer:
+
+Dataset     |  Initialization | Average SSE   | Average Iterations
+==================================================================
+   100.csv  |        forgy    | 8472.63311469 |  2.43
+   100.csv  |        kmeans++ | 8472.63311469 |  2.0
+  1000.csv  |        forgy    | 21337462.2968 |  3.28
+  1000.csv  |        kmeans++ | 19887301.0042 |  3.16
+ 10000.csv  |        forgy    | 168842238.612 |  21.1
+ 10000.csv  |        kmeans++ |  22323178.8625|  7.5
+
+We see that kmeans++ performs better than forgy initialization.
+The main thing in kmeans clustering is that it is not guaranteed to give us the global optima due to random initialization. It rather looks for local optimums. In kmeans++, the initial centroids are distributed over the dataset. Hence there is a larger probability that they are closer to the optimum configuration and this is also the reason why (1)-> kmeans++ converges faster than forgy and (2)-> it has a lower SSE than forgy initialization.
+
+For 100.csv, there were very less data-points and only 2 clusters were being made. So a simple random initialization suffices (although average SSE was same, kmeans's only improvement was in number of iterations). For large datasets, the probability that the random initialization does not "cover" the whole dataset is much more and hence the number of iterations taken is more and also the SSE is higher. Also the importance of kmeans++ shows up when the number of clusters are more. In this case the truth of the above statement unfolds as can be seen in the data above (as a side example, I did 10000.csv for k=2 and forgy took n=3.2 and kmeans++ took n=3.4). Hence as as the dataset increases and as the number of clusters increases we can see that there is a drastic difference in performance of the two heuristics (compare 3.28/3.16=1.03 to 21.1/7.5=2.81 and 21337462/19887301=1.07 to 168842238/22323178=7.56).
+
+================
+  TASK 4
+================
+
+1. Can you observe from the visualization that k-medians algorithm is more robust to outliers as compared to k-means? Why do you think this happens? (1.5 marks)
+
+Answer: Yes, we can observe from the visualization that k-medians algorithm is more robust to outliers as compared to k-means. In the plots that we obtained for 			outliers*.csv, we can see that in k-medians the space where the majority of the points are there have been divided into clusters and the outliers belong to 		one cluster to which they are closest. While in k-means, many a times, these outliers form a one whole cluster of their own. This is also the reason why the 		 SSE in k-means is higher as compared to k-medians.
+		The reason why k-medians is more robust to outliers is because when outliers are present, the kmeans algorithm takes them also into account and the mean is adversarily affected. Hence these outliers get a centroid/cluster of their own with a high SSE. But k-medians uses median instead of mean as a representative of the data and median is more robust to outliers. As a simple example, if we consider the set [1,2,3,4,5,6,501], then the median is 4 while the mean is 74.6. The moment the the outlier is removed, median goes from 3 to 3.5, while mean goes from 74.6 to 3.5, clearly demonstrating the fact that the median is a better representative of the data when outliers are present. Hence to a great extent k-medians doesn't really care about outliers and it behaves as good as if the outliers were never there. This was the reason why the median of the cluster containing the outliers in the csv file, which were on the top right corner of the plot, was present in the space where majority of the points were there. But for kmeans, the centroids were hugely affected.
+
+================
+  TASK 8
+================
+
+1. What do you observe as we reduce the number of clusters (k)? Answer in reference to the quality of decompressed image. (0.5 mark)
+
+Answer: In the decompress function, the centroid is the representative of the cluster and we replace each point within the cluster with the centroid. So for example 		 when we ran the code for k=64, in the decompressed image, there will be 64 colors. And this is the reason why in the decompressed, the boundaries at some 			places are visible, for instance, look at how the boundaries are prominent in the tongue of the tiger and the green patch of grass on the left of the tiger. 		 Hence the whole process is a lossy and the image is "smoothed".
+		As we decrease the number of clusters, the number of colors in the image decreases. Hence the boundaries become more and more prominent and the image starts becoming somewhat grayscale (For k=4, the green is completely gone and for k=2, only two shades of gray/two colors remain). The quality degrades as the number of clusters decreases.
+
+
+2. You can observe that for the small number of clusters, the degree of compression (original size/compressed size) is about the same as that of when we use larger number of clusters even though we need to store lesser number of colors. Can you tell why? How can we increase this ratio in case of smaller number of clusters? [1 mark]
+
+Answer: Yes, even for small number of clusters, the degree of compression is about the same as that of when we use larger number of clusters (the ratio is approx 			2.999 ~ 3). The reason is that every 3x8 bits 3D pixel in the original file is being replaced by its corresponding cluster label in the compressed image 			which is just 8 bits. Although we need to store lesser number of colors, the number of pixels remains the same. Hence ratio is almost 3 (it is not exactly 3 		 because of the first three lines containing metadata of the image like (x+3y)/(x+y) where x<<y) and it is the same regardless of the number of clusters, 			because the number of pixels are the same for each k.
+		As we reduce the number of clusters, the types of colors that we need to store also reduces leading to more and more redundancy in the pixels. To increase the ratio in the smaller number of clusters we can do two things. We can use techniques which exploit this redundancy like RLE (run length encoding) or Huffman's encoding (lossless data compression) to further compress it. Also we see that we need only 64 colors for k=64. Hence instead of using 8 bits to store each pixel in the compressed image, we can use only 6 bits to store each pixel and similarly for lesser values of k. 
