@@ -1,0 +1,27 @@
+______
+Task 4
+------
+=> Random Initialization's tour length starts from about 3300-3400. For Nearest Neighbour initialization, the starting tour length is about 790 on average (ranges from 750 to 815 approximately). Euclidean MST initialization's tour length starts at around 815. So random initilization performs the worst while nearest neighbour and euclidean perform much better, with nearest neighbour better on an average.
+=> The number of iterations taken for random initialization is around 65 on an average, while it is 13 on an average for Nearest Neighbour (ranges from 9 to 16). For Euclidean MST, the number of iterations is 16. Again Random initialization is the worst.
+=> The Final tour length in case of random initialization is around 750 on an average. For nearest neighbour, the final end tour is around 700 on an average, while for Euclidean MST, it is 710.
+
+So overall, Random Initialization performs worst in all cases. This is expected as it is "random", it doesn't take into account any of the information that can be obtained from the cities and the distances. Other initializations perform better. In one way Euclidean MST performs better than Nearest Neighbour, reason being that nearest neighbour is start city dependent. For some initial city, it gives better results, but for others it gives poor results. This comes down to the fact that it is "greedy", there is no reason that a greedy approach will work while a MST actually minimizes the distances between the cities.
+Note that if we are willing to increase our computations and run Nearest Neighbour multiple times then maybe we can comes across a case where nearest neighbour performs better than Euclidean MST as is evident from the graphs.
+
+                               ------------------
+
+__________
+Task 2 & 6
+----------
+When we use 3-opt+2-opt, the number of iterations taken to converge is significantly less (45 compared to 65 on average) and the final tour length is also better (700 on average compared to 790 on average). Using 3opt+2opt performs better both in terms of the final tour length and the number of iterations.
+__________
+Task 3 & 7
+----------
+When we use 3-opt+2-opt, the number of iterations taken to converge is significantly less (9 compared to 12 on average) and the final tour length is also better (690 on average compared to 700 on average). So, 3opt+2opt performs better both in terms of the final tour length and the number of iterations.
+__________
+Task 4 & 8
+----------
+When we use 3-opt+2-opt, the number of iterations are almost equal (16 in number) and the final tour length is also almost equal (702 compared to 708). So 3opt+2opt performs marginally better than 2opt.
+
+So, according to these observations, 3-opt+2-opt performs better than 2-opt in almost all the cases. This is because when we use 3opt+2opt for generating the neighbours we cover more possibilities and hence there are chances that we get a better local optimum (although one can realize that maybe in ith iteration 3opt+2opt gave a better next tour than 2opt, but maybe in (i+1)th iteration 2opt could overtake, but we don't get to see this case). Also the number of iterations are also less for 3opt+2opt. When we do 2-opt twice, some cases may match what we get when we run 3-opt once. So when we do 3-opt+2-opt, we already cover some of the future iterations of sole 2-opt, hence we have to iterate lesser number of times in 3opt+2opt than in 2opt.
+Note that, there is a time factor as well. 3opt+2opt will take more time to compute than 2opt, but gives better results.
