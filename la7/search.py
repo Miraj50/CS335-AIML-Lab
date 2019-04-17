@@ -41,7 +41,7 @@ def sudokuDepthFirstSearch(problem):
             break
         children = problem.getSuccessors(state)
         for child in children:
-            if child not in lh:
+            if convertStateToHash(child[0]) not in lh:
                 s.push(child[0])
     return state
     # util.raiseNotDefined()
